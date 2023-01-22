@@ -36,7 +36,7 @@ router.get('/api/short-url', urlencoded, async(req, res) =>{ // รับโพ�
 
     // เช็ค ถ้าเกิดว่าเคยใช้ลิ้งนี้ไปเเล้ว
     const getData = await query({
-        sql: `SELECT * FROM short_url WHERE origin_url='${url}'`,
+        sql: `SELECT * FROM short_url WHERE original_url='${url}'`,
     });
     if(getData.result.rows.length !== 0){
         return res.json({
