@@ -1,7 +1,7 @@
 module.exports = {
     app: {
         port: 8888,
-        domain_url: 'http://127.0.0.1:8888',
+        domain_url: 'https://useless-api.cyclic.app/',
     },
     database: {
         postgreSQL: {
