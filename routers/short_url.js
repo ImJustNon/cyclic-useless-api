@@ -34,8 +34,23 @@ router.get('/api/short-url', urlencoded, async(req, res) =>{ // รับโพ�
         });
     }
 
-    const unique_id = await generate(7);
+    // เช็ค ถ้าเกิดว่าเคยใช้ลิ้งนี้ไปเเล้ว
+    const getData = await query({
+        sql: `SELECT * FROM short_url WHERE origin_url='${url}'`,
+    });
+    if(getData.result.rows.length !== 0){
+        return res.json({
+            status: "SUCCESS",
+            error: null,
+            unique_id: getData.result.rows[0].unique_id,
+            url: `${config.app.domain_url}/short/${getData.result.rows[0].unique_id}`,
+            original_url: url,
+        });
+    }
 
+
+    // หากยังไม่เคยพบให้บันทึกใหม่
+    const unique_id = await generate(7);
     await query({
         sql: `INSERT INTO short_url(unique_id, original_url) VALUES('${unique_id}','${url}')`,
     }).then(() =>{
