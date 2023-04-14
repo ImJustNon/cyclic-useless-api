@@ -79,8 +79,9 @@ router.get('/short/:unique_id', async(req, res) =>{
             error: "Cant find original url from this id",
         });
     }
-
-    res.redirect(await rows[0].original_url);
+    setTimeout(async() =>{
+        res.redirect(await rows[0].original_url);
+    }, 1.5 * 1000); 
 });
 
 
