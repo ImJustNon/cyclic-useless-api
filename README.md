@@ -20,7 +20,17 @@
 3) เริ่ม server => `yarn start` หรือ `yarn dev` สำหรับ Nodemon
 4) เย่ๆๆ คุณได้ API โง่ๆมาอันนึง
 
-<br>
+<h2>🛠 Database config</h2>
+
+- for short url api
+
+```js
+    table         :: short_url
+
+    column 1      :: unique_id (VARCHAR(255))
+    column 2      :: original_url (VARCHAR(255))
+```
+
 <br>
 <br>
 <h1># หมายเหตุ #</h1>

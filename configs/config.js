@@ -1,17 +1,30 @@
+require("dotenv").config();
+
 module.exports = {
     app: {
-        port: 8888,
+        port: process.env.PORT || 8888,
         domain_url: 'https://useless-api.cyclic.app',
     },
     database: {
         postgreSQL: {
-            user: 'nondeklnw',
-            host: 'dpg-cek2d6da4991ihg4gn8g-a.singapore-postgres.render.com',
-            database: 'lazy_api',
-            password: 'nXPnh95QnSQeyC9y1w1uFjjUntbLJzPf',
-            port: 5432,
-            application_name: "lazy_api", 
-            ssl: true,
+            user: process.env.PG_USER || '',
+            host: process.env.PG_HOST || '',
+            database: process.env.PG_DATABASE || '',
+            password: process.env.PG_PASSWORD || '',
+            port: parseInt(process.env.PG_PORT),
+            application_name: process.env.PG_APP_NAME || '', 
+            ssl: parseBool(process.env.PG_SSL),
         }
     },
+}
+
+
+function parseBool(val) {
+    if(val){
+        if(val.toLowerCase() === 'true'){
+            return true;
+        }
+        else return false;
+    }
+    else return false;
 }
